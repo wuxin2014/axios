@@ -25,7 +25,7 @@ server = http.createServer(function (req, res) {
   if (pathname === '/') {
     pathname = '/index.html';
   }
-
+  // todo 访问到地址
   if (pathname === '/index.html') {
     pipeFileToResponse(res, './client.html');
   } else if (pathname === '/axios.js') {
