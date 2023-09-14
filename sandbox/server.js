@@ -27,7 +27,7 @@ server = http.createServer(function (req, res) {
   }
   // todo 访问到地址
   if (pathname === '/index.html') {
-    pipeFileToResponse(res, './client.html');
+    pipeFileToResponse(res, './cancelToken.html');
   } else if (pathname === '/axios.js') {
     pipeFileToResponse(res, '../dist/axios.js', 'text/javascript');
   } else if (pathname === '/axios.map') {

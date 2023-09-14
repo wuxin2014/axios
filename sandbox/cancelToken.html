@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+  <title>axios</title>
+  <style type="text/css">
+    .small-label {
+      font-size: 20px;
+      border: 1px solid orchid;
+      display: inline-block;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+    .scale-half {
+      transform: scale(0.5, 0.5);
+      transform-origin: 0 0;
+    }
+  </style>
+</head>
+<body class="container">
+  <h1>axios</h1>
+  <div>
+    <div style="padding: 10px 0">
+      <button id="submit" type="submit" class="btn btn-primary">Send Request</button>
+    </div>
+    <div style="font-size: 20px; padding: 10px; border: 1px solid red">dd<span class="small-label scale-half">smallTag</span></div>
+    <div style="padding: 10px; border: 1px solid orange"><span class="small-label">smallTag</span></div>
+  </div>
+  <script src="/axios.js"></script>
+  <script>
+    (function () {
+      var submit = document.getElementById('submit');
+
+      const reqInstance = axios.create({ timeout: 20000 })
+      reqInstance.interceptors.request.use(config => {
+        console.log('request-interceptors=res==', config)
+        return config
+      }, error => {
+        console.log('request-interceptors=error==', error)
+        return error
+      }) 
+      reqInstance.interceptors.response.use(res => {
+        console.log('response-interceptors=res==', res)
+        return res
+      }, error => {
+        console.log('response-interceptors=error==', error)
+        return error
+      })
+      submit.onclick = function() {
+        debugger
+        // const source = axios.CancelToken.source();
+        const params = {
+          url: '/api',
+          params: { a: 1, b: 'test'},
+          data: { a: 1, b: 'test'},
+          method: 'post',
+          // headers: getHeaders(),
+          // cancelToken: source.token
+        }
+        reqInstance.request(params).then(res => {
+          console.log('then', res)
+        })
+      }
+    })();
+  </script>
+</body>
+</html>

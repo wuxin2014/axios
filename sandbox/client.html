@@ -139,7 +139,7 @@
         };
 
         request.innerHTML = JSON.stringify(options, null, 2);
-
+        debugger
         axios(options)
           .then(function (res) {
             response.innerHTML = JSON.stringify(res.data, null, 2);
